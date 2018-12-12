@@ -1,12 +1,19 @@
 <template>
-  <div class="hello">
-    huhu
+  <div>
+    <homepage-header></homepage-header>
+    <homepage-swiper></homepage-swiper>
   </div>
 </template>
 
 <script>
+import HomepageHeader from './header'
+import HomepageSwiper from './swiper'
 export default {
-  name: 'HomePage'
+  name: 'homepage',
+  components: {
+    HomepageHeader: HomepageHeader,
+    HomepageSwiper: HomepageSwiper
+  }
 }
 </script>
 
