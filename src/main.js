@@ -5,9 +5,14 @@ import App from './App'
 import router from './router'
 import FastClick from 'fastclick'
 import 'css/iconfont/iconfont.css'
+import 'css/reset.css'
+import VueAweSomeSwiper from 'vue-awesome-swiper'
+// 需要stylus
+import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
 FastClick.attach(document.body)
+Vue.use(VueAweSomeSwiper)
 
 /* eslint-disable no-new */
 new Vue({

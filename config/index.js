@@ -10,7 +10,17 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/': {
+        //目标接口域名. 当在开发环境中访问根路径时, 就会走代理服务器, 代理服务器找不到请求, 会帮你去localhost里去找
+        target: 'http://localhost:8080',  
+        changeOrigin: true,  //是否跨域
+        pathRewrite: {
+            // '^/api': ''
+          '/api': '/static'   //重写接口. 当访问API路径下的数据时, 代理到static目录下
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
