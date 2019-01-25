@@ -1,18 +1,19 @@
 {
   "data": {
-	"swiperlist": [{
-		"id": "1001",
-		"imgurl": "http://img1.qunarzz.com/piao/fusion/1812/b6/5c41d23b9bb36102.jpg_750x200_8d36a5db.jpg",
-		"link": "/xxx"
-	 }, {
-		"id": "1002",
-		"imgurl": "http://img1.qunarzz.com/piao/fusion/1812/2f/49f6152a86eb4502.jpg_750x200_f4841fa3.jpg",
-		"link": "/xxx"
-	 }, {
-		"id": "1003",
-		"imgurl": "http://img1.qunarzz.com/piao/fusion/1809/d4/e298dff35d3af802.jpg_750x200_9b0d56c1.jpg",
-		"link": "/xxx"
-	 }],
+  "defaultCity": "北京",
+  "swiperlist": [{
+    "id": "1001",
+    "imgurl": "http://img1.qunarzz.com/piao/fusion/1812/b6/5c41d23b9bb36102.jpg_750x200_8d36a5db.jpg",
+    "link": "/xxx"
+   }, {
+    "id": "1002",
+    "imgurl": "http://img1.qunarzz.com/piao/fusion/1812/2f/49f6152a86eb4502.jpg_750x200_f4841fa3.jpg",
+    "link": "/xxx"
+   }, {
+    "id": "1003",
+    "imgurl": "http://img1.qunarzz.com/piao/fusion/1809/d4/e298dff35d3af802.jpg_750x200_9b0d56c1.jpg",
+    "link": "/xxx"
+   }],
   "iconlist": [{
     "id": "1001",
     "imgUrl": "http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png",

@@ -4,15 +4,18 @@
     <div class="search">
       <span class="hint iconfont">&#xe632;</span>请输入搜索内容
     </div>
-    <div class="city">
-      乌鲁木齐
+    <div class="city" >
+      <router-link class="link-city" to="/SelecteCity">{{defaultCity}}</router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'homepage-header'
+  name: 'homepage-header',
+  props: {
+    defaultCity: String
+  }
 }
 </script>
 
@@ -50,6 +53,7 @@ export default {
       font-size: .3rem
       padding: 0 .6rem 0 .22rem
       position: relative
+      max-width: 1.2rem
       &:before
         position: absolute
         content: " "
@@ -60,4 +64,6 @@ export default {
         border-top: .14rem solid #fff
         border-left: .12rem solid transparent
         border-right: .12rem solid transparent
+      .link-city
+        color: #fff
 </style>
