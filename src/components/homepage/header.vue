@@ -4,17 +4,27 @@
     <div class="search">
       <span class="hint iconfont">&#xe632;</span>请输入搜索内容
     </div>
-    <div class="city" >
-      <router-link class="link-city" to="/SelecteCity">{{defaultCity}}</router-link>
+    <div class="city" @click="handleClickDefaultCity">
+      <!-- 使用router-link 或者 this.$router.push -->
+      <!-- <router-link class="link-city" to="/SelecteCity">{{defaultCity}}</router-link> -->
+      {{headerDefaultCity}}
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'homepage-header',
-  props: {
-    defaultCity: String
+  methods: {
+    handleClickDefaultCity () {
+      this.$router.push({path: '/SelecteCity'})
+    }
+  },
+  computed: {
+    ...mapGetters({
+      headerDefaultCity: 'addChecked'
+    })
   }
 }
 </script>

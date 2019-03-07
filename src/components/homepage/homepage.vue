@@ -1,6 +1,6 @@
 <template>
   <div class='homepage'>
-    <homepage-header :defaultCity="defaultCity"></homepage-header>
+    <homepage-header></homepage-header>
     <homepage-swiper :swiperData="swiperInfo"></homepage-swiper>
     <homepage-gridview :gridviewData="gridviewInfo"></homepage-gridview>
     <homepage-position-and-list></homepage-position-and-list>
@@ -19,7 +19,9 @@ import HomepageBuyAndList from './buyAndList'
 import HomepageHotCharts from './hotCharts'
 import HomepageGuessYoulike from './guessYouLike'
 import axios from 'axios'
+import {mapState, mapMutations} from 'vuex'
 export default {
+  // name可以在使用DEVTOOLS调试的时候更直观,
   name: 'homepage',
   components: {
     HomepageHeader: HomepageHeader,
@@ -36,18 +38,26 @@ export default {
       gridviewInfo: [],
       hotchartsInfo: [],
       hotchartsIconInfo: [],
-      guessYouLikeInfo: [],
-      defaultCity: ''
+      guessYouLikeInfo: []
     }
+  },
+  computed: {
+    ...mapState({
+      mapCity: 'city'
+    })
   },
   methods: {
     getHomepageData () {
       // 如果第一次defaultCity没有内容,就取一个默认值. 正规逻辑应该是没有数据时, 给后台发送一个空字符串,后台使用用户IP定位好城市再返给前端,如果这么操作的话,请求成功时会有城市的数据.
-      const defaultCity = localStorage.defaultCity ? localStorage.defaultCity : '北京'
-      axios.get('/api/first.json?defaultCity=' + defaultCity)
+      // const defaultCity = localStorage.defaultCity ? localStorage.defaultCity : '北京'
+      console.log('000000000000000000000000')
+      axios.get('/api/first.json?defaultCity=' + this.mapCity)
         .then(this.getSwiperdataSucc.bind(this))
         .catch(this.getSwiperdataError.bind(this))
     },
+    ...mapMutations({
+      mapChangeCity: 'changeDefaultCity'
+    }),
     getSwiperdataSucc (res) {
       const jsonArray = res.data.data
       this.swiperInfo = jsonArray.swiperlist
@@ -56,27 +66,50 @@ export default {
       this.hotchartsIconInfo = jsonArray.hotchartsicon
       this.guessYouLikeInfo = jsonArray.guessyoulike
       this.defaultCity = jsonArray.defaultCity
-      // 把默认城市存进localStorage
-      localStorage.defaultCity = jsonArray.defaultCity
-      console.log('主页qing qiu wan le, localStorage.defaultCity是:')
-      console.log(localStorage.defaultCity)
+      // 请求成功的时候, 改state 里的数据
+      // 做这个判断是为了在退出程序再进入时，还是上次选择的城市， 而不是接口中默认的数据
+      if (!this.mapCity) {
+        this.mapChangeCity(jsonArray.defaultCity)
+        console.log('请求完数据了, CITY是' + this.mapCity)
+      }
     },
     getSwiperdataError (res) {
       console.log('error')
-    },
-    watchCurrCity () {
-      this.$bus.$on('changecity', this.changeDefaultCity.bind(this))
-    },
-    changeDefaultCity (value) {
-      // 在城市页面选择一个城市, 回到主页重新赋值
-      this.defaultCity = value
-      // 更改了城市,返回主页后, 需要从新请求数据
-      this.getHomepageData()
     }
   },
   created () {
     this.getHomepageData()
-    this.watchCurrCity()
+    console.log('created')
+  },
+  watch: {
+    mapCity () {
+      console.log('CITY改变了, 重新请求数据')
+      this.getHomepageData()
+    }
+  },
+  beforeCreate () {
+    console.log('beforecreated')
+  },
+  beforeMount () {
+    console.log('beforemounted')
+  },
+  mounted () {
+    console.log('mounted')
+  },
+  activated () {
+    console.log('activited')
+  },
+  beforeDestroy () {
+    console.log('beforedestroed')
+  },
+  destroyed () {
+    console.log('destroed')
+  },
+  beforeUpdate () {
+    console.log('beforeUpdate')
+  },
+  updated () {
+    console.log('updated')
   }
 }
 </script>

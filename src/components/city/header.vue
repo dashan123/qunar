@@ -16,21 +16,25 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'selectecity-header',
-  data () {
-    return {
-      city: localStorage.defaultCity ? localStorage.defaultCity : '黑龙江'
-    }
-  },
+  // data () {
+  //   return {
+  //     city: localStorage.defaultCity ? localStorage.defaultCity : '黑龙江'
+  //   }
+  // },
   methods: {
     handleBackToHome () {
       this.$router.go(-1)
     }
   },
-  activated () {
-    this.city = localStorage.defaultCity ? localStorage.defaultCity : '黑龙江'
+  computed: {
+    ...mapState(['city'])
   }
+  // activated () {
+  //   this.city = localStorage.defaultCity ? localStorage.defaultCity : '黑龙江'
+  // }
   // methods: {
   //   watchCurrCity () {
   //     this.$bus.$on('changecity', this.changeDefaultCity.bind(this))

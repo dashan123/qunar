@@ -1,6 +1,6 @@
 <template>
   <div class="myswiper">
-    <swiper :options="swiperOption">
+    <swiper :options="swiperOption" v-if="getSwiperListLength">
       <!-- slides -->
       <swiper-slide v-for="item of swiperData" :key="item.id">
         <img class="swiper-img" :src="item.imgurl">
@@ -25,6 +25,11 @@ export default {
         pagination: '.swiper-pagination',
         paginationClickable: true
       }
+    }
+  },
+  computed: {
+    getSwiperListLength () {
+      return !!this.swiperData.length
     }
   }
 }

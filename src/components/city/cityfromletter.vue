@@ -31,6 +31,7 @@
 
 <script>
 import BScroll from 'better-scroll'
+import {mapActions} from 'vuex'
 export default {
   name: 'selectecity-city-from-letter',
   props: {
@@ -48,12 +49,18 @@ export default {
   methods: {
     handleLetterClick (e) {
       this.theCurrLetter = e.target.innerText
+      console.log('========================进来了 this.theCurrLetter=' + this.theCurrLetter)
       const elment = this.$refs[this.theCurrLetter][0]
+      console.log('========================进来了 elment=' + elment)
       this.scroll.scrollToElement(elment)
     },
+    ...mapActions(['wait5SecondsToChangeCity']),
     clickCity (e) {
-      localStorage.defaultCity = e.target.innerText
-      this.$bus.$emit('changecity', e.target.innerText)
+      // 同步时:
+      // this.$store.commit('changeDefaultCity', e.target.innerText)
+      // 模拟异步
+      // this.$store.dispatch('wait5SecondsToChangeCity', e.target.innerText)
+      this.wait5SecondsToChangeCity(e.target.innerText)
       this.$router.go(-1)
     }
   },

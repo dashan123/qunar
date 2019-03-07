@@ -1,23 +1,60 @@
 <template>
   <ul class="mustPlayList">
-    <li class="position iconfont">
-      <span class="gpsicon">&#xe608;</span>定位失败
-    </li>
-    <li class="list iconfont">
-      <span class="listicon">&#xe689;</span>必游榜单
+    <transition name="transition-color">
+      <li v-show="show2" class="position iconfont" @click="show2 = !show2">
+        <span class="gpsicon">&#xe608;</span>定位失败
+      </li>
+    </transition>
+    <li :class="show ? classB : classA" @click="xxx">
+      <span >&#xe689;必游榜单</span>
     </li>
   </ul>
 </template>
 
 <script>
+
 export default {
-  name: 'homepage-position-and-list'
+  name: 'homepage-position-and-list',
+  data () {
+    return {
+      show: false,
+      show2: true,
+      classA: 'list iconfont',
+      classB: 'list iconfont animated shake'
+    }
+  },
+  methods: {
+    xxx () {
+      if (this.show === false) {
+        this.show = !this.show
+      }
+      // this.$nextTick(() => {
+      //   this.show = false
+      // })
+      console.log(this.show)
+    }
+  },
+  activated () {
+    this.show = false
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
 @import "../../../static/stylus/bg_color.styl"
+  .transition-color-enter-active {
+    transition: all 2s ease;
+  }
+  .transition-color-leave-active {
+    color: green
+    transition: all 2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .transition-color-enter, .transition-color-leave-to {
+    transform: translateX(20px);
+    color: red
+    opacity: 0;
+  }
   .mustPlayList
     position: relative
     display: -webkit-box
@@ -32,7 +69,7 @@ export default {
       width: 50%
       .gpsicon
         padding-right: .05rem
-    &:before
+    &:befores
       content: " "
       position: absolute
       width: .02rem
